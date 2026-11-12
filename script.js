@@ -10,86 +10,239 @@
 // --------------------------------------------------
 
 // First, we create a variable for the current scene being displayed
-let currentScene = "backyard";
+let currentScene = "bedroom";
 
 // Then, we create an object that stores the data for each scene,
 const scenes = {
   // See "backyard" for the first example
-  backyard: {
-    title: "Location: Backyard",
-    character: "Interviewee:Grandma",
-    text: "Text: well what I remember happening is that Darcie went inside to play with her pretend kitchen, I heard her neighbor mention he was really hungry, and the dog ran around really quickly",
+ 
+  bedroom: {
+    title: "Finally home from school!",
+    image: "Bed.jpg",
+    text: "You just came home from school and lots of work has been loaded up on you from your classes, your kinda stressted out about the things you have to get done. But you can decide to make decisions and actions that would help you feel better mentally that will help achieve your main objctive which is to finish all of your tasks. ",
     // you can choose how many choices to include
     // each choice can have text, an action, and/or nextScene
     choices: [
       {
-        text: "Chase after the dog (-10 HP)",
-        action: function () {
-          updateHealth(-10);
+        text: "Drink water (+5 energy, -5 pressure)",
+         action: function () {
+          updateEnergy(10);
+          updatePressure(2);
         },
-        nextScene: "entrance"
+        nextScene: "livingroom"
       },
       {
-        text: "Ask about the neighbor",
-        nextScene: "hallway"
+        text: "Eat a snack (+5 energy, -5 pressure)",
+         action: function () {
+          updateEnergy(5);
+          updatePressure(-5);
+        },
+        nextScene: "livingroom"
       },
       {
-          text: "Pick up the brass key",
-          action: function () {
-            pickUpItem("brass key");
-          },
-          nextScene: "hallway"
-      }
+        text: "Take a break on your phone (+2 energy, -5 pressure)",
+        action: function () {
+          updateEnergy(2);
+          updatePressure(-5);
+        },
+        nextScene: "livingroom"
+      },
+      {
+        text: "Take a nap (+10 energy +2 pressure)",
+        action: function () {
+          updateEnergy(10);
+          updatePressure(2);
+        },
+        nextScene: "livingroom"
+      },
+      {
+          text: "Go to the livingroom",
+          nextScene: "livingroom"
+      },
+      {
+          text: "Go outside",
+          nextScene: "outside"
+      },
+        {
+          text: "Go to the kitchen",
+          nextScene: "kitchen"
+      },
+        {
+          text: "Go to the garage",
+          nextScene: "garage"
+      },
     ]
   },
 
-  entrance: {
-    title: "Location: Entrance",
-    character: "Interviewee:Neighbor",
-    text: "well what I remember...",
+  livingroom: {
+    title: "Livingroom",
+    image: "images (2).jpg",
+    text: "You just entered the living room where your family is at. You have multiple choices of what you can do here that will determine how your day will turn out.",
     choices: [
       {
-        text: "Ask about the dog",
-        nextScene: "backyard"
-      },
-         {
-        text: "Ask about the neighbor",
-        nextScene: "hallway"
-      }
-    ]
-  },
-
-  hallway: {
-    title: "The Hallway",
-    text: "The hallway is dark and silent.",
-    choices: [
-      {
-        text: "backyard",
-        nextScene: "lockedDoor"
-      }
-    ]
-  },
-
-   lockedDoor: {
-    title: "The Locked Door",
-    text: "The door handle doesn't move.",
-    choices: [
-      {
-        text: "Try to open it",
-        action: unlockDoor
+        text: "Watch tv laying down (+5 energy, +5 pressure)",
+        action: function () {
+          updateEnergy(5);
+          updatePressure(5);
+        },
+        nextScene: "outside"
       },
       {
-        text: "Go back",
-        nextScene: "backyard"
-      }
+        text: "Talk to your family about your day (-4 energy, -2 pressure)",
+        action: function () {
+          updateEnergy(-4);
+          updatePressure(-2);
+        },
+        nextScene: "outside"
+      },
+      {
+        text: "Play with your dog (-5 energy -2 pressure)",
+        action: function () {
+          updateEnergy(-5);
+          updatePressure(-2);
+        },
+        nextScene: "outside"
+      },
+      {
+        text: "Take a nap (+ 10 Energy + 2 pressure)",
+        action: function () {
+          updateEnergy(10);
+          updatePressure(2);
+        },
+        nextScene: "outside"
+      },
+      {
+          text: "Go to the bedroom",
+          nextScene: "bedroom"
+      },
+      {
+          text: "Go outside",
+          nextScene: "outside"
+      },
+        {
+          text: "Go to the kitchen",
+          nextScene: "kitchen"
+      },
+        {
+          text: "Go to the garage",
+          nextScene: "garage"
+      },
     ]
   },
 
-   solution: {
-    title: "The solution",
-    text: "You solved the mystery!",
-    
-  }
+  outside: {
+    title: "Outside",
+    image: "outside.jpg",
+    text: "Your outside trying to take some time outside of the house just to clear your head a bit. You have multiple activities you can do.",
+    choices: [
+      {
+        text: "Go for a walk (-5 energy, -2 pressure)",
+        action: function () {
+          updateEnergy(-5);
+          updatePressure(-2);
+        },
+        nextScene: "kitchen"
+       
+      },
+       {
+        text: "Go for a jog (-5 energy, -5 pressure)",
+        action: function () {
+          updateEnergy(-5);
+          updatePressure(-5);
+        },
+        nextScene: "kitchen"
+       
+      },
+
+       {
+        text: "go to the store to buy a drink or food (+5 energy, -1 pressure)",
+        action: function () {
+          updateEnergy(5);
+          updatePressure(-1);
+        },
+        nextScene: "kitchen"
+       
+      },
+      
+  
+      
+    ]
+  },
+
+   kitchen: {
+    title: "Kitchen",
+    image: "NNN.avif",
+    text: "You came to the kitchen to most likely get something to drink or eat.",
+    choices: [
+      {
+        text: "Eat a snack (+5 energy, -5 pressure)",
+        action: function () {
+          updateEnergy(5);
+          updatePressure(-5);
+        },
+        nextScene: "garage"
+      },
+       {
+        text: "Get a drink of water (+5 energy)",
+        action: function () {
+          updateEnergy(5);
+        },
+        nextScene: "garage"
+      },
+      
+      {
+        text: "cook a full meal (+10 energy, +5 pressure)",
+        action: function () {
+          updateEnergy(10);
+          updatePressure(5);
+        },
+        nextScene: "garage"
+      },
+{
+        text: "Do some chores (-5 energy, -10 pressure)",
+        action: function () {
+          updateEnergy(-5);
+          updatePressure(-10);
+        },
+        nextScene: "garage"
+      },
+
+    ]
+  },
+
+   garage: {
+    title: "garage",
+    image: "garage.jpg",
+    text: "Your in the garage a place where things are stored and your family’s car is in there, theres also things you can do in the garage.",
+     choices: [
+      {
+        text: "play with your skateboard (-5 energy, -2 pressure)",
+        action: function () {
+          updateEnergy(-5);
+          updatePressure(-2);
+        },
+        nextScene: "garage"
+      },
+       {
+        text: "Do some stretches (-5 energy -5 pressure)",
+        action: function () {
+          updateEnergy(-5);
+          updatePressure(-5);
+        },
+        nextScene: "garage"
+      },
+      
+      {
+        text: "lift some weights (-10 energy, -5 pressure)",
+        action: function () {
+          updateEnergy(-10);
+          updatePressure(-5);
+        },
+        nextScene: "garage"
+      },
+
+    ]
+  },
 };
 
 // --------------------------------------------------
@@ -110,7 +263,7 @@ const scenes = {
 const sceneTitle = document.getElementById("scene-title");
 const sceneText = document.getElementById("scene-text");
 const choicesContainer = document.getElementById("choices-container");
-const characterName = document.getElementById("character-name");
+const sceneImage = document.getElementById("scene-image");
 
 // Then, we create a function to update the scene,
 function updateScene(sceneName) {
@@ -125,7 +278,7 @@ function updateScene(sceneName) {
   // the appropriate text from the scene object
   sceneTitle.textContent = scene.title;
   sceneText.textContent = scene.text;
-  characterName.textContent = scene.character;
+  sceneImage.src = scene.image;
 
   // Clear the old buttons before creating new ones
   choicesContainer.innerHTML = "";
@@ -165,19 +318,35 @@ updateScene(currentScene);
 // --------------------------------------------------
 
 // Create a variable for health
-let health = 100;
+let pressure = 50;
 
 // Display current health
-const healthDisplay = document.getElementById("health-display");
+const pressureDisplay = document.getElementById("pressure-display");
 
 // Create a function to update health 
-function updateHealth(amount) {
-  health += amount;
-  healthDisplay.textContent = health;
+function updatePressure(amount) {
+  pressure += amount;
+  pressureDisplay.textContent = pressure;
 }
 
 // This refreshes the health display
-updateHealth(0);
+updatePressure(0);
+
+//-----------
+// Create a variable for energy
+let energy = 50;
+
+// Display current energy
+const energyDisplay = document.getElementById("energy-display");
+
+// Create a function to update energy 
+function updateEnergy(amount) {
+  energy += amount;
+  energyDisplay.textContent = energy;
+}
+
+// This refreshes the energy display
+updateEnergy(0);
 
 // --------------------------------------------------
 // INVENTORY
